@@ -21,7 +21,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: kirskirill/diplomapp
-          tags: ${{ github.event.number }}
+          tags: ${{ github.event.ref }}
       -
         name: Login to DockerHub
         if: github.event_name != 'pull_request'
