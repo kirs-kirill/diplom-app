@@ -15,13 +15,27 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v4
+      
+      - 
+        uses: benjlevesque/short-sha@v3.0
+        id: short-sha
+        with:
+          length: 7
+      - 
+        run: echo $SHA
+        env:
+          SHA: ${{ steps.short-sha.outputs.sha }}
+      - 
+        run: echo $SHA
+        env:
+          SHA: ${{ env.SHA }}
       -
         name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: kirskirill/diplomapp
-          tags: ${{ GIHUB_SHA::7 }}
+          tags: ${{ env.SHA }}
       -
         name: Login to DockerHub
         if: github.event_name != 'pull_request'
