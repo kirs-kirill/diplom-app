@@ -4,9 +4,6 @@ on:
   push:
     tags:
       - 'v*'
-  pull_request:
-    branches:
-      - 'main'
 
 jobs:
   docker:
@@ -15,13 +12,19 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v4
+      
       -
         name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: kirskirill/diplomapp
-          tags: ${{ github.event.commits.added.tags }}
+          tags: 
+            type=ref,event=tag
+        env:
+          DOCKER_METADATA_SHORT_SHA_LENGTH: 7
+          DOCKER_METADATA_PR_HEAD_SHA: false
+
       -
         name: Login to DockerHub
         if: github.event_name != 'pull_request'
@@ -29,6 +32,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_LOGIN }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+          
       -
         name: Build and push
         uses: docker/build-push-action@v6
