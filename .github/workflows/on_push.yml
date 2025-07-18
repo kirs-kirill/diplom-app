@@ -21,14 +21,12 @@ jobs:
         id: short-sha
         with:
           length: 7
+
       - 
         run: echo $SHA
         env:
           SHA: ${{ steps.short-sha.outputs.sha }}
-      - 
-        run: echo $SHA
-        env:
-          SHA: ${{ env.SHA }}
+
       -
         name: Docker meta
         id: meta
@@ -36,6 +34,7 @@ jobs:
         with:
           images: kirskirill/diplomapp
           tags: ${{ env.SHA }}
+
       -
         name: Login to DockerHub
         if: github.event_name != 'pull_request'
@@ -43,6 +42,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_LOGIN }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+          
       -
         name: Build and push
         uses: docker/build-push-action@v6
