@@ -24,7 +24,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: kirskirill/diplomapp
-          tags: type=sha
+          tags: type=sha,prefix=
         env:
           DOCKER_METADATA_SHORT_SHA_LENGTH: 7
           DOCKER_METADATA_PR_HEAD_SHA: false
