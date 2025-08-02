@@ -42,12 +42,13 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
       -
-        name: get pods
+        name: Update image on deployment
         uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
         with:
           args: set image deployment/my-app my-app=kirskirill/diplomapp:${{ github.ref_name }}
+
 
 
 
