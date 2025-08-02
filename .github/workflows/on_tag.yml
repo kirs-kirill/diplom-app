@@ -47,7 +47,8 @@ jobs:
         uses: steebchen/kubectl@v2.0.0
         with:
           config: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
-          command: set image --record deployment/my-app container=kirskirill/diplomapp:${{ github.tag }}
+          command: kubectl set image deployment/my-app my-app=kirskirill/diplomapp:${{ github.tag }}
+
 
 
 
