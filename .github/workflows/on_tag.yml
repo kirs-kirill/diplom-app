@@ -42,6 +42,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
       -
+        name: get pods
         uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
@@ -53,6 +54,7 @@ jobs:
         with:
           config: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
           command: kubectl set image deployment/my-app my-app=kirskirill/diplomapp:${{ github.tag }}
+
 
 
 
