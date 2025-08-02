@@ -47,7 +47,8 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
         with:
-          args: set image deployment/my-app my-app=kirskirill/diplomapp:${{ github.tag }}
+          args: set image deployment/my-app my-app=kirskirill/diplomapp:${{ github.ref_name }}
+
 
 
 
