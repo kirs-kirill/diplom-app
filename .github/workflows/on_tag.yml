@@ -46,5 +46,5 @@ jobs:
         uses: tale/kubectl-action@v1
         with:
           base64-kube-config: ${{ secrets.KUBE_CONFIG_BASE64 }}
-      - run: kubectl get nodes
-          # args: set image deployment/my-app my-app=kirskirill/diplomapp:${{ github.ref_name }}
+      - run: kubectl set image deployment/my-app my-app=kirskirill/diplomapp:${{ github.ref_name }}
+        
