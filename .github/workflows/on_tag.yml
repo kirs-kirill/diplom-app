@@ -43,12 +43,12 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
       -
         name: Update image on deployment
-        uses: steebchen/kubectl@v2.0.0
+        uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_BASE64 }}
         with:
-          command: set image deployment/my-app my-app=kirskirill/diplomapp:${{ github.ref_name }}
-
+          # args: set image deployment/my-app my-app=kirskirill/diplomapp:${{ github.ref_name }}
+          args: get nodes
 
 
 
